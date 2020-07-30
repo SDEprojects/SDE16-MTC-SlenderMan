@@ -2,6 +2,7 @@ package com.slenderman.game;
 
 import com.slenderman.actors.Player;
 import com.slenderman.actors.SlenderMan;
+import com.slenderman.musicplayer.SimplePlayer;
 import com.slenderman.scenes.Cave;
 import com.slenderman.scenes.Field;
 import com.slenderman.scenes.Forest;
@@ -26,7 +27,7 @@ public final class Game {
 
   // For Unit Testing Purpose //
   //TODO change back to false so intro will play once development is complete.
-  private boolean disableIntroduction = false;
+  private boolean disableIntroduction = true;
   private boolean reachedTree = false;
 
   private Scene currentScene;
@@ -38,12 +39,12 @@ public final class Game {
   private final Scene aCave;
   private final Scene aField;
   private final Scene LoseGameScene;
-  private final int sleep = 300; //was 3000ms except for last 3 were 5000ms
-  private final int endAndExit = 900; // was 9000ms made shorter for dev purposes
 
   public static boolean isPlayerAlive;
 
   private final Player Player;
+
+
 
   /*
    * =============================================
@@ -51,7 +52,7 @@ public final class Game {
    * =============================================
    */
 
-  public Game() {
+  public Game(){
     Player = new Player();
     aShed = new Shed();
     aTree = new Tree();
@@ -69,6 +70,9 @@ public final class Game {
     aCave.connectEast(aPond);
     aPond.connectEast(aField);
     aField.connectEast(aTree);
+
+//    SimplePlayer player = new SimplePlayer();
+
   }
 
   /*
@@ -83,6 +87,8 @@ public final class Game {
     // For Unit Testing purpose
     if (!disableIntroduction) {
       Introduction.playIntro();
+
+      //TODO Java.util.timer to reduce repeated OneMinuteTimer
       new LoseGameTimer(10);
       new OneMinuteTimer(1);
       new OneMinuteTimer(2);
@@ -154,39 +160,39 @@ public final class Game {
   }
 
   private void winMessage() throws InterruptedException {
-    Thread.sleep(sleep);
+    Thread.sleep(2000);
     System.out.println("You walk slowly towards a lonely tree in the middle of a field...\n");
-    Thread.sleep(sleep);
+    Thread.sleep(3000);
     System.out.println("Something tells you to carve an X on the tree...\n");
-    Thread.sleep(sleep);
+    Thread.sleep(3000);
     System.out.println("You take the blade, and stab it into the tree...\n");
-    Thread.sleep(sleep);
+    Thread.sleep(3000);
     System.out.println(
         "You breathe heavily as you begin to make the shape of an X on the tree...\n");
-    Thread.sleep(sleep);
+    Thread.sleep(3000);
     System.out.println("As you finish, you take a couple steps back...\n");
-    Thread.sleep(sleep);
+    Thread.sleep(3000);
     System.out.println("You begin to hear an overpowering screeching sound...\n");
-    Thread.sleep(sleep);
+    Thread.sleep(3000);
     System.out.println("You see something emerge from the shadows...\n");
-    Thread.sleep(sleep);
+    Thread.sleep(3000);
     System.out.println("The creature cracks and shifts around as it approaches you...\n");
-    Thread.sleep(sleep);
+    Thread.sleep(3000);
     System.out.println("The screeching becomes unbearable as you begin to lose your senses...\n");
-    Thread.sleep(sleep);
+    Thread.sleep(3000);
     System.out.println(
         "You reach out for the blade and hold it front of you as the creature charges...\n");
-    Thread.sleep(sleep);
+    Thread.sleep(3000);
     System.out.println("...\n");
-    Thread.sleep(sleep);
+    Thread.sleep(4000);
     System.out.println("...\n");
-    Thread.sleep(sleep);
+    Thread.sleep(5000);
     System.out.println("You have killed SlenderMan!\n");
-    Thread.sleep(sleep);
+    Thread.sleep(3000);
     System.out.println("You let out a sigh of relief as the sun rises over the thick woods.\n");
     System.out.println(
         "You see a possible exit in the distance, and begin your journey to freedom...\n");
-    Thread.sleep(sleep);
+    Thread.sleep(5000);
     System.out.println(
         "\n"
             + "       __                            \n"
