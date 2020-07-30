@@ -26,7 +26,7 @@ public final class Game {
 
   // For Unit Testing Purpose //
   //TODO change back to false so intro will play once development is complete.
-  private boolean disableIntroduction = true;
+  private boolean disableIntroduction = false;
   private boolean reachedTree = false;
 
   private Scene currentScene;

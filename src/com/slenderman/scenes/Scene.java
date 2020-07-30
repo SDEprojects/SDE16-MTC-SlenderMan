@@ -76,29 +76,29 @@ public abstract class Scene {
     Scene nextScene = null;
 
     //TODO changed to switch statement. Reduced code size. code commented out below just in case.
-    switch (direction) {
-      case "north" -> nextScene = sceneToTheNorth;
-      case "south" -> nextScene = sceneToTheSouth;
-      case "east" -> nextScene = sceneToTheEast;
-      case "west" -> nextScene = sceneToTheWest;
-      default -> System.out.println("Error: unknown direction " + direction);
-    }
-
-//    if ("north".equals(direction)) {
-//      nextScene = sceneToTheNorth;
-//
-//    } else if ("east".equals(direction)) {
-//      nextScene = sceneToTheEast;
-//
-//    } else if ("south".equals(direction)) {
-//      nextScene = sceneToTheSouth;
-//
-//    } else if ("west".equals(direction)) {
-//      nextScene = sceneToTheWest;
-//
-//    } else {
-//      System.out.println("Error: unknown direction " + direction);
+//    switch (direction) {
+//      case "north" -> nextScene = sceneToTheNorth;
+//      case "south" -> nextScene = sceneToTheSouth;
+//      case "east" -> nextScene = sceneToTheEast;
+//      case "west" -> nextScene = sceneToTheWest;
+//      default -> System.out.println("Error: unknown direction " + direction);
 //    }
+
+    if ("north".equals(direction)) {
+      nextScene = sceneToTheNorth;
+
+    } else if ("east".equals(direction)) {
+      nextScene = sceneToTheEast;
+
+    } else if ("south".equals(direction)) {
+      nextScene = sceneToTheSouth;
+
+    } else if ("west".equals(direction)) {
+      nextScene = sceneToTheWest;
+
+    } else {
+      System.out.println("Error: unknown direction " + direction);
+    }
 
     if (nextScene == null) {
       System.out.println("You cannot go " + direction + " from here.");

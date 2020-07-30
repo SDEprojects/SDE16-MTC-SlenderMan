@@ -9,7 +9,7 @@ import java.util.ResourceBundle;
 public class Introduction {
 
   // For Resource Bundle //
-  static final String FILE_BASE_NAME = "storyIntroNoColor";
+  static final String FILE_BASE_NAME = "storyIntro_en_US";
   static final String PATH = "com.slenderman.scenes.files.";
 
   static ResourceBundle.Control rbc = ResourceBundle.Control.getControl(ResourceBundle.Control.FORMAT_DEFAULT);
