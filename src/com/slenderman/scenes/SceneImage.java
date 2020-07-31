@@ -1,8 +1,21 @@
 package com.slenderman.scenes;
 
+import javax.swing.*;
+import java.awt.*;
+
 public class SceneImage {
-  public static void printForest(){
-    System.out.println("\n" +
+  private JTextArea currentScene = new JTextArea(80, 100);
+//    forest.setBackground(Color.BLACK);
+//    forest.setForeground(Color.GREEN);
+//    forest.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
+//    forest.setText(SceneImage.printForest());
+
+
+  public JTextArea printForest(){
+    currentScene.setBackground(Color.BLACK);
+    currentScene.setForeground(Color.GREEN);
+    currentScene.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
+    currentScene.setText("\n" +
       "+-----------+-----------+\n" +
       "|  Forest   |   House   |\n" +
       "|           |           |\n" +
@@ -12,6 +25,7 @@ public class SceneImage {
       "|           |           |           |           |  The End  | \n" +
       "|           |           |           |           |           | \n" +
       "+-----------+-----------+-----------+-----------+-----------+");
+    return getCurrentScene();
   }
   public static void printHouse() {
     System.out.println("\n" +
@@ -26,8 +40,11 @@ public class SceneImage {
       "+-----------+-----------+-----------+-----------+-----------+");
   }
 
-  public static void printShed() {
-    System.out.println("\n" +
+  public JTextArea printShed() {
+    currentScene.setBackground(Color.BLACK);
+    currentScene.setForeground(Color.GREEN);
+    currentScene.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
+    currentScene.setText("\n" +
       "+-----------+-----------+ \n" +
       "|  Forest   |   House   | \n" +
       "|           |           | \n" +
@@ -37,6 +54,7 @@ public class SceneImage {
       "|           |           |           |           |  The End  | \n" +
       "|  (Player) |           |           |           |           | \n" +
       "+-----------+-----------+-----------+-----------+-----------+");
+    return getCurrentScene();
   }
 
   public static void printCave() {
@@ -89,5 +107,9 @@ public class SceneImage {
       "|           |           |           |           |  The End  | \n" +
       "|           |           |           |           |  (Player) | \n" +
       "+-----------+-----------+-----------+-----------+-----------+");
+  }
+
+  public JTextArea getCurrentScene() {
+    return currentScene;
   }
 }

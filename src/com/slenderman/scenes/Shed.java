@@ -3,6 +3,8 @@ package com.slenderman.scenes;
 import com.slenderman.actors.Item;
 import com.slenderman.actors.ItemDirector;
 import com.slenderman.actors.Player;
+
+import javax.swing.*;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -60,7 +62,7 @@ public class Shed extends Scene {
     this.player = player;
 
     choice = in;
-    SceneImage.printShed();
+//    SceneImage.printShed();
     inFrontOfShed();
   }
 
@@ -179,5 +181,10 @@ public class Shed extends Scene {
       ", itemsInThisScene=" + itemsInThisScene +
       ", Key=" + Key +
       "} " + super.toString();
+  }
+
+  @Override
+  public JTextArea printThis() {
+    return null;
   }
 }

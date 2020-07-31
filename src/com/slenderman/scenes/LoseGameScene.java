@@ -5,6 +5,7 @@ import com.slenderman.actors.ItemDirector;
 import com.slenderman.actors.Player;
 import com.slenderman.actors.SlenderMan;
 
+import javax.swing.*;
 import java.text.MessageFormat;
 import java.util.*;
 import java.util.Scanner;
@@ -26,6 +27,11 @@ public class LoseGameScene extends Scene {
     player.setCurrentSceneName(this.getSceneName());
     choice = in;
     loseGame();
+  }
+
+  @Override
+  public JTextArea printThis() {
+    return null;
   }
 
   public void loseGame() throws InterruptedException {

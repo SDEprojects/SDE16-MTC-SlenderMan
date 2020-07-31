@@ -1,5 +1,6 @@
 package com.slenderman.game;
 
+import com.slenderman.actors.SlenderMan;
 import com.slenderman.musicplayer.SimplePlayer;
 import java.util.Scanner;
 
@@ -18,8 +19,9 @@ public class Starter {
     Thread thread1 = new Thread(){
       public void run(){
         Game game = new Game();
-        new Console(game);
         Scanner scanMe = new Scanner(System.in);
+        new Console(game);
+
         try {
           game.start(scanMe);
         } catch (InterruptedException e) {
@@ -30,18 +32,33 @@ public class Starter {
 
     Thread thread2 = new Thread(){
       public void run(){
-        SimplePlayer player = new SimplePlayer();
+        while(!SlenderMan.isGameDone) {
+          SimplePlayer player = new SimplePlayer("Paranormal_Lullaby.mp3");
+        }
+      }
+    };
+
+    Thread thread3 = new Thread(){
+      public void run(){
+        try {
+          while (!SlenderMan.isGameDone) {
+            sleep(60000);
+            SimplePlayer player = new SimplePlayer("Scream.mp3");
+          }
+          } catch(InterruptedException e){
+            e.printStackTrace();
+          }
       }
     };
 
     thread1.start();
     thread2.start();
-    Game game = new Game();
-    new Console(game);
-    Scanner scanMe = new Scanner(System.in);
-    game.start(scanMe);
-    SimplePlayer player = new SimplePlayer();
-
+    thread3.start();
+//    Game game = new Game();
+//    new Console(game);
+//    Scanner scanMe = new Scanner(System.in);
+//    game.start(scanMe);
+//    SimplePlayer player = new SimplePlayer();
 
   }
  }

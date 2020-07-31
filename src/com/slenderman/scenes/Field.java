@@ -3,6 +3,8 @@ package com.slenderman.scenes;
 import com.slenderman.actors.Item;
 import com.slenderman.actors.ItemDirector;
 import com.slenderman.actors.Player;
+
+import javax.swing.*;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -168,5 +170,10 @@ public class Field extends Scene {
       ", itemsInThisScene=" + itemsInThisScene +
       ", Blade=" + Blade +
       "} " + super.toString();
+  }
+
+  @Override
+  public JTextArea printThis() {
+    return null;
   }
 }

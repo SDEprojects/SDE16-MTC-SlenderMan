@@ -2,6 +2,7 @@ package com.slenderman.scenes;
 
 import com.slenderman.actors.Player;
 
+import javax.swing.*;
 import java.text.MessageFormat;
 import java.util.*;
 
@@ -58,6 +59,11 @@ public class Pond extends Scene {
     this.player = player;
     SceneImage.printPond();
     inFrontOfPond(in);
+  }
+
+  @Override
+  public JTextArea printThis() {
+    return null;
   }
 
   private void inFrontOfPond(Scanner in) throws InterruptedException {

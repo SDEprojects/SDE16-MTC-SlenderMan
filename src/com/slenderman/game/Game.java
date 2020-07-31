@@ -26,19 +26,21 @@ import java.util.Scanner;
 public final class Game {
 
   // For Unit Testing Purpose //
+
   //TODO change back to false so intro will play once development is complete.
-  private boolean disableIntroduction = true;
+  private boolean disableIntroduction = false;
   private boolean reachedTree = false;
 
-  private Scene currentScene;
+
   private final Scene aHouse;
-  private final Scene aForest;
+  private final Scene aForest = new Forest();
   private final Shed aShed;
   private final Scene aTree;
   private final Scene aPond;
   private final Scene aCave;
   private final Scene aField;
   private final Scene LoseGameScene;
+  private Scene currentScene = aForest;
 
   public static boolean isPlayerAlive;
 
@@ -60,7 +62,7 @@ public final class Game {
     aCave = new Cave();
     aField = new Field();
     aHouse = new House();
-    aForest = new Forest();
+//    aForest = new Forest();
     LoseGameScene = new LoseGameScene();
 
     aForest.connectSouth(aShed);
@@ -105,6 +107,7 @@ public final class Game {
 
     Player.setCurrentSceneName(currentScene.getSceneName());
 
+    currentScene.printThis();
     currentScene.enter(in, Player);
 
     while (true) {
@@ -213,5 +216,9 @@ public final class Game {
 
   public void setDisableIntroduction(boolean disableIntroduction) {
     this.disableIntroduction = disableIntroduction;
+  }
+
+  public com.slenderman.actors.Player getPlayer() {
+    return Player;
   }
 }

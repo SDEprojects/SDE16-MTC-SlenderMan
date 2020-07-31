@@ -1,6 +1,9 @@
 package com.slenderman.scenes;
 
 import com.slenderman.actors.Player;
+
+import javax.swing.*;
+import java.awt.*;
 import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.MissingResourceException;
@@ -36,10 +39,17 @@ public class Forest extends Scene {
       Scene sceneToTheNorth, Scene sceneToTheSouth, Scene sceneToTheEast, Scene sceneToTheWest) {
     super(sceneToTheNorth, sceneToTheSouth, sceneToTheEast, sceneToTheWest);
   }
+  public JTextArea printThis() {
+//    enter(in,player);
+    JTextArea result = new JTextArea(80,100);
+    result.setText(displayStories("forest"));
+    result.setForeground(Color.GREEN);
+    return result;
+  }
 
   @Override
   public void enter(Scanner in, Player player) {
-    SceneImage.printForest();
+//    SceneImage.printForest();
 
     System.out.println(
               "               ,@@@@@@@,\n"
@@ -73,15 +83,19 @@ public class Forest extends Scene {
   }
 
   /** For accessing and displaying stories in Resource Bundle file */
-  private void displayStories(String key) {
+  public String displayStories(String key) {
+    StringBuilder sb = new StringBuilder();
+    String result = "";
     _max_iteration_not_reached = false;
     for (int i = 0; i < MAX_ITERATION_DISPLAY_STORIES; i++) {
       try {
-        System.out.println(textPainter(bundle.getString(key + "[" + Integer.toString(i) + "]")));
+        sb.append("\n" + bundle.getString(key + "[" + Integer.toString(i) + "]"));
       } catch (MissingResourceException e) {
         _max_iteration_not_reached = true;
         break;
       }
     }
+    result = sb.toString();
+    return result;
   }
 }

@@ -1,5 +1,9 @@
 package com.slenderman.game;
 
+import com.slenderman.actors.Player;
+import com.slenderman.scenes.Forest;
+import com.slenderman.scenes.SceneImage;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -26,6 +30,8 @@ class Console extends JFrame implements ActionListener {
   JTextField tfIn;
   JLabel lblOut;
   JTextArea outText;
+  Forest ft = new Forest();
+
 
   private final PipedInputStream inPipe = new PipedInputStream();
   private final PipedInputStream outPipe = new PipedInputStream();
@@ -33,6 +39,7 @@ class Console extends JFrame implements ActionListener {
   private boolean clicked = false;
 
   PrintWriter inWriter;
+  SceneImage scene = new SceneImage();
 
   public Console(Game game) {
     super("SlenderMan");
@@ -53,8 +60,8 @@ class Console extends JFrame implements ActionListener {
     int jRows = 100;
 
     outText = new JTextArea(jRows, jColumns);
-    outText.setBackground(Color.BLACK);
-    outText.setForeground(Color.WHITE);
+//    outText.setBackground(Color.BLACK);
+//    outText.setForeground(Color.WHITE);
     outText.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
 
     JScrollPane scroll =
@@ -65,16 +72,20 @@ class Console extends JFrame implements ActionListener {
 
     panel.add(scroll, BorderLayout.CENTER);
 
-    System.setOut(
-        new PrintStream(
-            new OutputStream() {
 
-              @Override
-              public void write(int b) throws IOException {
-                outText.append(String.valueOf((char) b));
-                outText.setCaretPosition(outText.getDocument().getLength());
-              }
-            }));
+    panel.add(game.getCurrentScene().printThis(), BorderLayout.CENTER);
+
+//    System.setOut(
+//        new PrintStream(
+//            new OutputStream() {
+//
+//              @Override
+//              public void write(int b) throws IOException {
+//                outText.append(String.valueOf((char) b));
+//                outText.setCaretPosition(outText.getDocument().getLength());
+////                outText.setText(game.getCurrentScene().toString());
+//              }
+//            }));
 
     tfIn = new JTextField();
     //trying placeholder here

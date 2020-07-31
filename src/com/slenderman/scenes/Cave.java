@@ -3,6 +3,8 @@ package com.slenderman.scenes;
 import com.slenderman.actors.Item;
 import com.slenderman.actors.ItemDirector;
 import com.slenderman.actors.Player;
+
+import javax.swing.*;
 import java.text.MessageFormat;
 import java.util.*;
 
@@ -360,5 +362,10 @@ public class Cave extends Scene {
       ", itemsInThisScene=" + itemsInThisScene +
       ", boat=" + boat +
       "} " + super.toString();
+  }
+
+  @Override
+  public JTextArea printThis() {
+    return null;
   }
 }

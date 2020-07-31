@@ -2,6 +2,7 @@ package com.slenderman.scenes;
 
 import com.slenderman.actors.Player;
 
+import javax.swing.*;
 import java.util.Scanner;
 
 public class AbandonedCar extends Scene {
@@ -15,6 +16,11 @@ public class AbandonedCar extends Scene {
   @Override
   public void enter(Scanner in, Player player) throws InterruptedException {
     player.setCurrentSceneName(this.getSceneName());
+  }
+
+  @Override
+  public JTextArea printThis() {
+    return null;
   }
 
   public AbandonedCar(

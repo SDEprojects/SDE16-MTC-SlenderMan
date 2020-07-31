@@ -1,9 +1,8 @@
 package com.slenderman.scenes;
 
-import com.slenderman.actors.Item;
 import com.slenderman.actors.Player;
 
-import java.text.MessageFormat;
+import javax.swing.*;
 import java.util.*;
 
 public class Tree extends Scene {
@@ -35,5 +34,10 @@ public class Tree extends Scene {
       System.out.println(bundle.getString("enter_1") + " " + player.TOTAL_NUM_ITEMS_TO_FINISH_GAME);
       System.out.println(bundle.getString("enter_2") + " " + player.getNumItemsPlayerHas() + " "+ bundle.getString("enter_3"));
     }
+  }
+
+  @Override
+  public JTextArea printThis() {
+    return null;
   }
 }
