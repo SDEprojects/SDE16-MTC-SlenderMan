@@ -3,6 +3,7 @@ package com.slenderman.scenes;
 import com.slenderman.actors.Item;
 import com.slenderman.actors.ItemDirector;
 import com.slenderman.actors.Player;
+import com.slenderman.game.GameMap;
 import jdk.jshell.spi.SPIResolutionException;
 
 import java.text.MessageFormat;
@@ -67,6 +68,7 @@ public class Shed extends Scene {
 
     choice = in;
     SceneImage.printShed();
+//    GameMap.makeMap("shed");
     inFrontOfShed();
   }
 

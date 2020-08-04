@@ -15,6 +15,9 @@ import com.slenderman.scenes.Shed;
 import com.slenderman.scenes.Tree;
 import com.slenderman.tools.*;
 
+import javax.swing.*;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.time.temporal.Temporal;
 import java.util.Scanner;
 import java.util.Timer;
@@ -32,12 +35,17 @@ public final class Game {
 
   // For Unit Testing Purpose //
 
-  private boolean disableIntroduction = false;
-//  private boolean disableIntroduction = true;
+//  private boolean disableIntroduction = false;
+  private boolean disableIntroduction = true;
 
   private boolean reachedTree = false;
 
-  private Scene currentScene;
+  private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+    this.pcs.addPropertyChangeListener(listener);
+  }
+
+  public Scene currentScene;
   private final Scene aHouse;
   private final Scene aForest;
   private final Shed aShed;
@@ -47,9 +55,14 @@ public final class Game {
   private final Scene aField;
   private final Scene LoseGameScene;
 
+
   public static boolean isPlayerAlive;
 
   private final Player Player;
+
+  public static Game  getInstance( ) {
+    return Game.getInstance();
+  }
 
 
 
@@ -114,16 +127,18 @@ public final class Game {
     }
 
     currentScene = aForest;
+    GameMap gm = new GameMap();
 
     Player.setCurrentSceneName(currentScene.getSceneName());
 
     currentScene.enter(in, Player);
 
     while (true) {
+//      gm.makeMap(currentScene.getSceneName());
       if (!SlenderMan.isGameDone) {
         userText = in.nextLine().toLowerCase().trim();
       } else {
-        currentScene = LoseGameScene;
+        setCurrentScene(LoseGameScene);
 
         Player.setCurrentSceneName(currentScene.getSceneName());
         Player.changeInvItemsLocation();
@@ -137,7 +152,7 @@ public final class Game {
       }
 
       if (userText.startsWith("go ")) {
-        currentScene = currentScene.changeScene(userText.substring(3));
+        setCurrentScene(currentScene.changeScene(userText.substring(3)));
 
         Player.setCurrentSceneName(currentScene.getSceneName());
         Player.changeInvItemsLocation();
@@ -223,6 +238,16 @@ public final class Game {
   /** For Unit Testing purpose */
   public Scene getCurrentScene() {
     return currentScene;
+  }
+
+  public void setCurrentScene(Scene newCurrentScene) {
+    Scene oldScene = this.currentScene;
+    this.currentScene = newCurrentScene;
+    this.pcs.firePropertyChange("currentScene", oldScene, newCurrentScene);
+  }
+
+  public com.slenderman.actors.Player getPlayer() {
+    return Player;
   }
 
   public void setDisableIntroduction(boolean disableIntroduction) {

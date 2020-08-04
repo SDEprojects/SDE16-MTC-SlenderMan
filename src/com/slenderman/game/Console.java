@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PipedInputStream;
@@ -22,10 +24,14 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingWorker;
 
-class Console extends JFrame implements ActionListener {
+class Console extends JFrame implements ActionListener, PropertyChangeListener {
   JTextField tfIn;
   JLabel lblOut;
   JTextArea outText;
+  Game game;
+  JPanel locMap;
+  GameMap gMap = new GameMap();
+  JPanel panel = new JPanel(new BorderLayout());
 
   private final PipedInputStream inPipe = new PipedInputStream();
   private final PipedInputStream outPipe = new PipedInputStream();
@@ -36,6 +42,7 @@ class Console extends JFrame implements ActionListener {
 
   public Console(Game game) {
     super("SlenderMan");
+    this.game = game;
     setFocusable(true);
 
     System.setIn(inPipe);
@@ -47,7 +54,30 @@ class Console extends JFrame implements ActionListener {
       return;
     }
 
-    JPanel panel = new JPanel(new BorderLayout());
+
+
+    locMap = new JPanel(new BorderLayout());
+    locMap.setBounds(100,100,200,200);
+    locMap.setBackground(Color.BLACK);
+
+    System.out.println("current scene: " + game.getPlayer().getCurrentSceneName());
+    if (game.getPlayer().getCurrentSceneName() != null) {
+      locMap.add(gMap.makeMap(game.getPlayer().getCurrentSceneName()));
+    } else {
+      locMap.add(gMap.makeMap(""));
+    }
+    panel.add(locMap, BorderLayout.EAST);
+
+// Property change listener for scene change
+    game.getPlayer().addPropertyChangeListener(evt -> {
+      if(evt.getPropertyName().equals(game.getPlayer().getCurrentSceneName())){
+        locMap.add(gMap.makeMap(game.getPlayer().getCurrentSceneName()));
+        panel.add(locMap, BorderLayout.EAST);
+      }
+    });
+
+//    makePanelUpdate();
+
 
 //ADDING TOP SET PANEL FOR INSTRUCTIONS
     //TODO adjust size of JPanel to make text look cleaner
@@ -94,11 +124,11 @@ class Console extends JFrame implements ActionListener {
     System.setOut(
         new PrintStream(
             new OutputStream() {
-
               @Override
-              public void write(int b) throws IOException {
-                outText.append(String.valueOf((char) b));
-                outText.setCaretPosition(outText.getDocument().getLength());
+              public void write(int b)  {
+                  outText.append(String.valueOf((char) b));
+                  outText.setCaretPosition(outText.getDocument().getLength());
+
               }
             }));
 
@@ -147,6 +177,35 @@ class Console extends JFrame implements ActionListener {
         return null;
       }
     }.execute();
+
+  }
+
+  private void makePanelUpdate() {
+//    locMap.addPropertyChangeListener(evt -> {
+////      if(evt.getPropertyName().equals(game.currentScene)){
+//      if (evt.getNewValue().equals(game.getPlayer().getCurrentSceneName())) {
+//        locMap.add(gMap.makeMap(game.getPlayer().getCurrentSceneName()));
+//        panel.add(locMap, BorderLayout.EAST);
+//      }
+//    });
+    System.out.println("current scene: " + game.getPlayer().getCurrentSceneName());
+    if (game.getPlayer().getCurrentSceneName() != null) {
+      locMap.add(gMap.makeMap(game.getPlayer().getCurrentSceneName()));
+    } else {
+      locMap.add(gMap.makeMap(""));
+    }
+    panel.add(locMap, BorderLayout.EAST);
+
+    game.getPlayer().addPropertyChangeListener(new PropertyChangeListener() {
+      @Override
+      public void propertyChange(PropertyChangeEvent evt) {
+        if(evt.getPropertyName().equals(game.getPlayer().getCurrentSceneName())){
+          locMap.add(gMap.makeMap(game.getPlayer().getCurrentSceneName()));
+          panel.add(locMap, BorderLayout.EAST);
+        }
+      }
+    });
+
   }
 
   @Override
@@ -156,4 +215,11 @@ class Console extends JFrame implements ActionListener {
 
     inWriter.println(text);
   }
+
+  @Override
+  public void propertyChange(PropertyChangeEvent evt) {
+    System.out.println("I hit the propertyChangeEvent");
+    evt.getNewValue();
+  }
+
 }

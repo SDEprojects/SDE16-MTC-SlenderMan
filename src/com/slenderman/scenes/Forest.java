@@ -1,6 +1,8 @@
 package com.slenderman.scenes;
 
 import com.slenderman.actors.Player;
+import com.slenderman.game.GameMap;
+
 import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.MissingResourceException;
@@ -8,7 +10,7 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class Forest extends Scene {
-
+private String sceneName = "forest";
   /*
    * =============================================
    * ============= Constructors ==================
@@ -40,7 +42,7 @@ public class Forest extends Scene {
   @Override
   public void enter(Scanner in, Player player) {
     SceneImage.printForest();
-
+//    GameMap.makeMap("forest");
     System.out.println(
               "               ,@@@@@@@,\n"
             + "       ,,,.   ,@@@@@@/@@,  .oo8888o.\n"
@@ -83,5 +85,10 @@ public class Forest extends Scene {
         break;
       }
     }
+  }
+
+  @Override
+  public String getSceneName() {
+    return sceneName;
   }
 }

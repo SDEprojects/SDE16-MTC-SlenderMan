@@ -18,7 +18,9 @@ public class Starter {
   public static void main(String[] args) throws InterruptedException {
 
     Game game = new Game();
+    System.out.println(game);
     new Console(game);
+
     Scanner scanme = new Scanner(System.in);
     game.gameOptions(scanme);
 

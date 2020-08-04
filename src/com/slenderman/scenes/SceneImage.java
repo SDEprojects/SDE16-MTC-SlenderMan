@@ -1,8 +1,12 @@
 package com.slenderman.scenes;
 
+import javax.swing.*;
+
 public class SceneImage {
-  public static void printForest(){
-    System.out.println("\n" +
+  public static JTextArea printForest(){
+
+    JTextArea result = new JTextArea();
+    result.append("\n" +
       "+-----------+-----------+\n" +
       "|  Forest   |   House   |\n" +
       "|           |           |\n" +
@@ -12,6 +16,7 @@ public class SceneImage {
       "|           |           |           |           |  The End  | \n" +
       "|           |           |           |           |           | \n" +
       "+-----------+-----------+-----------+-----------+-----------+");
+    return result;
   }
   public static void printHouse() {
     System.out.println("\n" +
